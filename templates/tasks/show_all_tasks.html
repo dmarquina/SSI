@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+	Dia a dia
+{% endblock  %}
+
+{% block content %}
+<div class="row">
+	<h4>Dia a dia</h4>
+	<hr>
+</div>
+
+<div class="row ">
+	<div class="col m12">
+		
+		<div class="row center-align">
+			<div class="col m1 ">
+				Componente	
+			</div>
+			<div class="col m2">
+				Controles
+			</div>
+			<div class="col m2">
+				Acciones
+			</div>
+			<div class="col m1">
+				Responsable
+			</div>
+			<div class="col m2">
+				{{todaydate|date:"l d F Y"}}
+			</div>
+			<div class="col m2">
+				{{yesterdaydate|date:"l d F Y"}}
+			</div>
+			<div class="col m2">
+				{{beforeyesterdaydate|date:"l d F Y"}}
+			</div>
+		<hr>
+		</div>
+
+
+		{% for t in taskdata%}
+		<div class="row center-align">
+			<div class="col m1 ">
+				{{t.component}}
+			</div>
+			<div class="col m2">
+				{{t.name}}
+			</div>
+			<div class="col m2">
+				{{t.actions}}
+			</div>
+			<div class="col m1">
+				{{t.responsable}}
+			</div>
+			<div class="col m2">
+				<div id="{{t.id}}today" class="componentprogress">
+				    <div id="componentbar{{t.id}}today" class="componentbar"></div>
+				    <label id="status{{t.id}}today" class="progressstatus">{{t.todayvalue}}%</label>
+				</div>
+			</div>
+			<div class="col m2">
+				<div id="{{t.id}}yesterday" class="componentprogress">
+				    <div id="componentbar{{t.id}}yesterday" class="componentbar"></div>
+				    <label id="status{{t.id}}yesterday" class="progressstatus">{{t.yesterdayvalue}}%</label>
+				</div>
+			</div>
+			<div class="col m2">
+				<div id="{{t.id}}beforeyesterday" class="componentprogress">
+				    <div id="componentbar{{t.id}}beforeyesterday" class="componentbar"></div>
+				    <label id="status{{t.id}}beforeyesterday" class="progressstatus">{{t.beforeyesterdayvalue}}%</label>
+				</div>
+			</div>
+			<hr>
+		</div>
+		{% endfor %}
+	</div>
+</div>	
+{% endblock  %}

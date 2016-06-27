@@ -1,0 +1,45 @@
+.componentprogress {
+    position: relative;
+    width: 80%;
+    height: 15px;
+    background-color: #ACECE6;
+    margin: auto;
+}
+
+.componentbar {
+	width: 0%;
+    height: 100%;
+    background-color: #2ecc71;
+    left: 0;
+
+} 
+.progressstatus {
+    text-align: center;
+ 	font-size: 12px; 
+    font-weight: bold;
+    color: #2c3e50;
+    z-index: 2;
+}
+
+.progressstatus, .componentbar{
+	display: inline;
+ 	position: absolute; 
+ 	margin: auto;
+}
+
+hr {
+  max-width: 90rem;
+  height: 0;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 1px solid #cacaca;
+  border-left: 0;
+  clear: both; }
+
+h1,
+h2,
+h3,
+h4,
+h5{
+    color : #26a69a;
+}

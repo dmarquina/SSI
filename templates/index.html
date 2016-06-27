@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+	SSI
+{% endblock  %}
+
+{% block content %}
+<div class="row">
+	<h4>Componentes</h4>
+	<hr>
+</div>
+
+<div class="row ">
+	<div class="col m12">
+		
+		<div class="row center-align">
+			<div class="col m1 ">
+				Componente	
+			</div>
+			<div class="col m1">
+				Controles
+			</div>
+			<div class="col m3">
+				{{todaydate|date:"l d F Y"}}
+			</div>
+			<div class="col m3">
+				{{yesterdaydate|date:"l d F Y"}}
+			</div>
+			<div class="col m3">
+				{{beforeyesterdaydate|date:"l d F Y"}}
+			</div>
+		<hr>
+		</div>
+
+
+		{% for c in componentdata%}
+		<div class="row center-align">
+			<div class="col m1 ">
+				{{c.name}}
+			</div>
+			<div class="col m1">
+				{{c.taskquantity}}
+			</div>
+			<div class="col m3">
+				<div id="{{c.id}}today" class="componentprogress">
+				    <div id="componentbar{{c.id}}today" class="componentbar"></div>
+				    <label id="status{{c.id}}today" class="progressstatus">{{c.todayvalue}}%</label>
+				</div>
+			</div>
+			<div class="col m3">
+				<div id="{{c.id}}yesterday" class="componentprogress">
+				    <div id="componentbar{{c.id}}yesterday" class="componentbar"></div>
+				    <label id="status{{c.id}}yesterday" class="progressstatus">{{c.yesterdayvalue}}%</label>
+				</div>
+			</div>
+			<div class="col m3">
+				<div id="{{c.id}}beforeyesterday" class="componentprogress">
+				    <div id="componentbar{{c.id}}beforeyesterday" class="componentbar"></div>
+				    <label id="status{{c.id}}beforeyesterday" class="progressstatus">{{c.beforeyesterdayvalue}}%</label>
+				</div>
+			</div>
+			<hr>
+		</div>
+		{% endfor %}
+	</div>
+</div>	
+{% endblock  %}

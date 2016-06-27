@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+	Nueva Tarea
+{% endblock  %}
+
+{% block content %}
+		<form method="POST" action="{% url "tasks:createtask" %}">
+		<div class="row">
+			<div class="col l4 push-l4">
+				<div class="card ">
+				    <div class="card-content  ">
+			      		<span class="card-title"><h5>NUEVA TAREA</h5></span>
+						{% csrf_token %}
+						<div class="input-field col s12">
+							<input type="text" name="name"  id="name" class="validate" required="true"></input>
+				          	<label for="name">Tarea</label>
+						</div>
+			          	<div class="input-field col s12">
+			           		<textarea id="actions" class="materialize-textarea" name="actions" required="true"></textarea>
+		          			<label for="actions">Acción</label>
+				        </div>
+
+						<div class="input-field col s12">
+							<select name="responsable" required="true">
+							  <option value="" disabled selected>Elija un responsable</option>
+							  	{% for r in responsables %}
+									<option value={{r.id}} >{{r.name}} {{r.lastname}}</option>
+								{% endfor %}
+							</select>
+							<label>Responsable:</label>
+						</div>
+
+						<div class="input-field col s12">
+							<select name="component" required="true">
+							  <option value="" disabled selected>Elija un componente</option>
+							  	{% for c in components %}
+									<option value={{c.id}} >{{c.name}}</option>
+								{% endfor %}
+							</select>
+							<label>Componente:</label>
+						</div>
+							<button class="btn waves-effect waves-light " type="submit">Guardar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+{% endblock  %}
