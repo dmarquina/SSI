@@ -29,7 +29,7 @@ def createTask(request):
     	
 def showAllTasks(request):
 	taskdata=[]
-	tasks = Task.objects.all()
+	tasks = Task.objects.order_by('component')
 	today = datetime.now()
 	yesterday = today - timedelta(days=1)
 	beforeyesterday = yesterday - timedelta(days=1)

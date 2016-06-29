@@ -1,79 +1,75 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-	Dia a dia
+	Progreso por controles
 {% endblock  %}
 
 {% block content %}
 <div class="row">
-	<h4>Dia a dia</h4>
+	<div class="col s6">
+		<h4>Progreso por controles</h4>
+	</div>
+	<div class="col s6 push-s4" style="top:15px">
+		<a class="btn waves-effect waves-light" onclick="exportTo('xls');" href="javascript://">Exportar</a>
+	</div>
 	<hr>
 </div>
 
 <div class="row ">
 	<div class="col m12">
-		
-		<div class="row center-align">
-			<div class="col m1 ">
-				Componente	
-			</div>
-			<div class="col m2">
-				Controles
-			</div>
-			<div class="col m2">
-				Acciones
-			</div>
-			<div class="col m1">
-				Responsable
-			</div>
-			<div class="col m2">
-				{{todaydate|date:"l d F Y"}}
-			</div>
-			<div class="col m2">
-				{{yesterdaydate|date:"l d F Y"}}
-			</div>
-			<div class="col m2">
-				{{beforeyesterdaydate|date:"l d F Y"}}
-			</div>
-		<hr>
-		</div>
-
-
-		{% for t in taskdata%}
-		<div class="row center-align">
-			<div class="col m1 ">
-				{{t.component}}
-			</div>
-			<div class="col m2">
-				{{t.name}}
-			</div>
-			<div class="col m2">
-				{{t.actions}}
-			</div>
-			<div class="col m1">
-				{{t.responsable}}
-			</div>
-			<div class="col m2">
-				<div id="{{t.id}}today" class="componentprogress">
-				    <div id="componentbar{{t.id}}today" class="componentbar"></div>
-				    <label id="status{{t.id}}today" class="progressstatus">{{t.todayvalue}}%</label>
-				</div>
-			</div>
-			<div class="col m2">
-				<div id="{{t.id}}yesterday" class="componentprogress">
-				    <div id="componentbar{{t.id}}yesterday" class="componentbar"></div>
-				    <label id="status{{t.id}}yesterday" class="progressstatus">{{t.yesterdayvalue}}%</label>
-				</div>
-			</div>
-			<div class="col m2">
-				<div id="{{t.id}}beforeyesterday" class="componentprogress">
-				    <div id="componentbar{{t.id}}beforeyesterday" class="componentbar"></div>
-				    <label id="status{{t.id}}beforeyesterday" class="progressstatus">{{t.beforeyesterdayvalue}}%</label>
-				</div>
-			</div>
-			<hr>
-		</div>
-		{% endfor %}
+		<table  class="table centered striped">
+			<thead>
+				<tr class="valign-wrapper">
+					<th class="valign col m1" data-field="id">Componente</th>
+					<th class="valign col m2" data-field="name">Controles</th>
+					<th class="valign col m2" data-field="name">Acciones</th>
+					<th class="valign col m1" data-field="name">Responsable</th>
+					<th class="valign col m2" data-field="price">{{beforeyesterdaydate|date:"l d F Y"}}</th>
+					<th class="valign col m2" data-field="price">{{yesterdaydate|date:"l d F Y"}}</th>
+					<th class="valign col m2" data-field="price">{{todaydate|date:"l d F Y"}}</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for t in taskdata %}
+				<tr class="valign-wrapper">
+					<td class="valign col m1 ">{{t.component}}</td>
+					<td class="valign col m2">{{t.name}}</td>
+					<td class="valign col m2">{{t.actions}}</td>
+					<td class="valign col m1">{{t.responsable}}</td>
+					<td class="valign col m2">
+						<div id="{{t.id}}beforeyesterday" class="componentprogress">
+						    <div id="componentbar{{t.id}}beforeyesterday" class="componentbar"></div>
+						    <label id="status{{t.id}}beforeyesterday" class="progressstatus">{{t.beforeyesterdayvalue}}%</label>
+						</div>
+					</td>
+					<td class="valign col m2">
+						<div id="{{t.id}}yesterday" class="componentprogress">
+						    <div id="componentbar{{t.id}}yesterday" class="componentbar"></div>
+						    <label id="status{{t.id}}yesterday" class="progressstatus">{{t.yesterdayvalue}}%</label>
+						</div>
+					</td>
+					<td class="valign col m2">
+						<div id="{{t.id}}today" class="componentprogress">
+						    <div id="componentbar{{t.id}}today" class="componentbar"></div>
+							<label id="status{{t.id}}today" class="progressstatus">{{t.todayvalue}}%</label>
+						</div>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
 	</div>
 </div>	
+{% endblock  %}
+{% block js %}
+<script>
+function exportTo(type) {
+  $('.table').tableExport({
+    filename: 'table_%DD%-%MM%-%YY%',
+    cols: '1,2,3,4,5,6,7',
+    format: type,
+    head_delimiter: ' ',
+  });
+}
+</script>
 {% endblock  %}

@@ -12,7 +12,11 @@
 </head>
 <body>
 <!-- Dropdown Structure begin-->
-<ul id='dropdown1' class="dropdown-content">
+<ul id='dropdown_progresos' class="dropdown-content">
+	<li><a class="a-contrast" href="/">Por componentes</a></li>
+	<li><a class="a-contrast" href="{% url "tasks:showalltasks"%}">Por controles</a></li>	
+</ul>
+<ul id='dropdown_user' class="dropdown-content">
 	<li><a href="{% url "userprofiles:logout" %}" class ="a-contrast">Salir</a></li>
 </ul>
 <!-- Dropdown Structure end-->
@@ -23,14 +27,13 @@
 			      	<a href="#" class="brand-logo">SSI</a>
 			      	<ul id="nav-mobile" class="right hide-on-med-and-down">
 			      		{% if user.is_admin %}
-			        	<li><a class="a-contrast" href="/">Componentes</a></li>
-			        	<li><a class="a-contrast" href="{% url "tasks:showalltasks"%}">Dia a dia</a></li>
+			        	<li><a class="dropdown-button" href="#" data-activates="dropdown_progresos">Ver progresos</a></li>
 			        	<li><a class="a-contrast" href="{% url "tasks:createtask" %}">Nuevo Control</a></li>
 			        	<!-- Dropdown Trigger-->
 			        	{% endif %}	
 			        	{% if user.is_authenticated %}
 						<li><a href="{% url "progress:showprogress" %}" class ="a-contrast">Mi Progreso</a></li>
-			        	<li><a class="dropdown-button" href="#" data-activates="dropdown1">{{ user.name }} {{ user.lastname }}</a></li>
+			        	<li><a class="dropdown-button" href="#" data-activates="dropdown_user">{{ user.name }} {{ user.lastname }}</a></li>
 						
 						{% else %}
 						<a class="a-contrast" href="{% url "userprofiles:signin" %}">Iniciar Sesión</a>
@@ -49,6 +52,7 @@
 <script src="{% static 'js/jquery.js' %}"></script>
 <script src="{% static 'js/materialize.js' %}"></script>
 <script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/tableExporter.js' %}"></script>
 {% block js %}
 {% endblock %}   
 </html>
